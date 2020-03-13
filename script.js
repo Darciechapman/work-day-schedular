@@ -7,58 +7,41 @@ var yearDate = date.getFullYear();
 
 document.getElementById("currentDay").innerHTML = (dayDate + "/" + monthDate + "/" + yearDate);
 
-//document.getElementsByClassName(".container").addClassList(".future");
-
-//format("L.T"); start of hour
-
-//if time less then current time add past class to container
-//if current hour is displayed add present class to the container
-// if current time is over current hour in time block, change class container to future class
-
-var displayTime = [9, 10, 11, 12, 13, 14, 15, 16, 17]
-
-//display string in time-blocks. forEach displaytime inner text time-block
-
-//var timeBlock = $(".time-block").innerHTML
-//console.log(toDoRow);
-
-//loop for timestamps
+var displayTime = ["9", "10", "11", "12", "13", "14", "15", "16", "17"]
 
 var time = ""
 
-addRow(forEach(displayTime));
 
-
-
-function addRow() {
+displayTime.forEach(function(element) {
     
-    let row = $("<div>").addClass("row")  
-    let timeBlock = $("<div>").addClass("col-sm-1 time-block")
-    let input = $("<input>").addClass("col-sm-10")
-    let saveBtn = $("<button>").addClass("col-sm-1 saveBtn")
+    var row = $("<div>").addClass("row"); 
+    var timeBlock = $("<aside>").addClass("col-sm-1 time-block");
+    let input = $("<input>").addClass("col-sm-10");
+    var saveBtn = $("<button>").addClass("col-sm-1 saveBtn");
 
-    //timeBlock.text(hour);
+    timeBlock.innerText = displayTime;
 
     row.append(timeBlock);
     row.append(input);
-    row.append(saveBtn)
-    
-  
+    row.append(saveBtn);
 
-    $("row-container").append(row);
+    $("section").append(row);
 
-}
+    (saveBtn).click(function() {
+
+        if (input.innerText === "") {
+            alert("error", "Email cannot be blank");
+        }
+    });
+
+});
 
 
 
-$("button").addEventListener("click", () => {
-    if (input.innerHTML != "") {
-        localStorage()
-    }
-})
 
-function localStorage() {
-    localStorage.getItem(input);
-}
 
-var saveBtnClickEvent = saveBtn.addEventListener("click");
+//function localStorage() {
+ //   localStorage.getItem(input);
+//}
+
+//var saveBtnClickEvent = saveBtn.addEventListener("click");
