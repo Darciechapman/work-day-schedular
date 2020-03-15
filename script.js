@@ -4,8 +4,11 @@ var date = new Date();
 var dayDate = date.getDate();
 var monthDate = date.getMonth() + 1;
 var yearDate = date.getFullYear();
+var currenthour = moment().format('LT')
 
 document.getElementById("currentDay").innerHTML = (dayDate + "/" + monthDate + "/" + yearDate);
+
+//parse momment
 
 var displayTime = ["9", "10", "11", "12", "13", "14", "15", "16", "17"]
 
@@ -15,28 +18,57 @@ var time = ""
 displayTime.forEach(function(element) {
     
     var row = $("<div>").addClass("row"); 
-    var timeBlock = $("<aside>").addClass("col-sm-1 time-block");
-    let input = $("<input>").addClass("col-sm-10");
+    var timeBlock = $("<div>").addClass("col-sm-1 time-block");
+    var input = $("<input>").addClass("col-sm-10");
     var saveBtn = $("<button>").addClass("col-sm-1 saveBtn");
 
-    timeBlock.innerText = displayTime;
+    if (displayTime > currenthour) {
+        input.addClass("future");
+    } else if (displayTime < currenthour) {
+        input.addClass("past");
+    } else {
+        input.addClass("present");
+    }
+
+    timeBlock.text(element);
+    //timeBlock.innerHTML = JSON.stringify(element)
+    //console.log(element.toString())
+    
 
     row.append(timeBlock);
     row.append(input);
     row.append(saveBtn);
+    
+    //let hour = JSON.stringify(element)
+    //$("aside").innerText = hour
+    //console.log(JSON.stringify(element))
 
-    $("section").append(row);
-
-    (saveBtn).click(function() {
-
-        if (input.innerText === "") {
-            alert("error", "Email cannot be blank");
-        }
-    });
+    $("#container").append(row)
 
 });
 
+$("button").on("click", function() {
+    var inputText = $("input").text
+    if (inputText === "") {
+        alert("error", "Email cannot be blank");
+    } else {
+        storeToDo();
+    }
+});
 
+
+
+//displayTime.forEach(function(element) {
+   // $("aside").innerHTML = JSON.stringify(element)
+//}
+
+
+function storeToDo() {
+   var inputText = $("input").text
+   JSON.parse(localStorage.getItem("todoData"));
+   localStorage.setItem("todoData", JSON.stringify(inputText));
+
+}
 
 
 
