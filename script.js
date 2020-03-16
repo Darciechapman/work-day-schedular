@@ -4,16 +4,39 @@ var date = new Date();
 var dayDate = date.getDate();
 var monthDate = date.getMonth() + 1;
 var yearDate = date.getFullYear();
-var currenthour = moment().format('LT')
+
+var currenthour = moment().format('HH')
 
 document.getElementById("currentDay").innerHTML = (dayDate + "/" + monthDate + "/" + yearDate);
 
 //parse momment
 //set a value
-var displayTime = ["9:00am", "10:00am", "11:00am", "12:00pm", "1:00pm", "2:00pm", "3:00pm", "4:00pm", "5:00pm"]
+var displayTime = [
+    {text:"9:00am",
+    value:"9"},
+    {text:"10:00am",
+    value:"10"},
+    {text:"11:00am",
+    value:"11"},
+    {text:"12:00am",
+    value:"12"},
+    {text:"1:00pm",
+    value:"13"},
+    {text:"2:00pm",
+    value:"14"},
+    {text:"3:00pm",
+    value:"15"},
+    {text:"4:00pm",
+    value:"16"},
+    {text:"5:00pm",
+    value:"17"},
+]
+
 
 
 var time = ""
+
+alert(currenthour)
 
 
 displayTime.forEach(function(element) {
@@ -24,17 +47,17 @@ displayTime.forEach(function(element) {
     //var checkBtn = $("<button>").addClass("col-sm-1");
     var saveBtn = $("<button>").addClass("col-sm-1 saveBtn");
 
-    if (displayTime > currenthour) {
-        input.addClass("future");
-    } else if (displayTime < currenthour) {
+    if (element.value === currenthour) {
+        input.addClass("present");
+    } else if (element.value < currenthour) {
         input.addClass("past");
     } else {
-        input.addClass("present");
+        input.addClass("future");
     }
 
-    timeBlock.text(element);
-    input.attr('id', element); 
-    saveBtn.attr('id', element);
+    timeBlock.text(element.text);
+    input.attr('id', element.text); 
+    saveBtn.attr('id', element.text);
     //timeBlock.innerHTML = JSON.stringify(element)
     //console.log(element.toString())
     
@@ -84,10 +107,10 @@ $("button").on("click", function() {
 function storeToDo() {
         if (typeof (window.localStorage) != "undefined") {
             //set the value to the text fields
-            $("input[type=text]").val(function () {
+            $('input[type="text"]').val(function () {
                 return localStorage.getItem(this.id);
             });
-            $("input[type=text]").on("change", function () {
+            $('input[type="text"]').on("change", function () {
                 localStorage.setItem(this.id, $(this).val());
             });
         }
