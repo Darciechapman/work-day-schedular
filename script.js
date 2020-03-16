@@ -9,7 +9,6 @@ var currenthour = moment().format('HH')
 
 document.getElementById("currentDay").innerHTML = (dayDate + "/" + monthDate + "/" + yearDate);
 
-//parse momment
 //set a value
 var displayTime = [
     {text:"9:00am",
@@ -39,10 +38,6 @@ var displayTime = [
     {text:"5:00pm",
     value:"17"},
 ]
-
-
-
-var time = ""
 
 //alert(currenthour)
 
@@ -81,9 +76,9 @@ displayTime.forEach(function(element) {
 $("button").on("click", function() {
     
     if(!$('input[type="text"]').val()) {
-        
+        //clearLocal();
+        //localStorage.clear();
     } else {
-        
         jQuery();
     }
 })
@@ -105,15 +100,3 @@ jQuery(function ($) {
 });
 
 
-$("#9:00Btn").off().on("click", function() {
-    
-        localStorage.clear();
-    
-    
-});
-
-// get key id and print in input text
-//if key === input id print inner html
-
-//add a check button
-//<i class="fas fa-check"></i>
