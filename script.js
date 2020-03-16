@@ -14,20 +14,28 @@ document.getElementById("currentDay").innerHTML = (dayDate + "/" + monthDate + "
 var displayTime = [
     {text:"9:00am",
     value:"9"},
+
     {text:"10:00am",
     value:"10"},
+
     {text:"11:00am",
     value:"11"},
+
     {text:"12:00am",
     value:"12"},
+
     {text:"1:00pm",
     value:"13"},
+
     {text:"2:00pm",
     value:"14"},
+
     {text:"3:00pm",
     value:"15"},
+
     {text:"4:00pm",
     value:"16"},
+
     {text:"5:00pm",
     value:"17"},
 ]
@@ -36,14 +44,14 @@ var displayTime = [
 
 var time = ""
 
-alert(currenthour)
+//alert(currenthour)
 
 
 displayTime.forEach(function(element) {
     
     var row = $("<div>").addClass("row"); 
     var timeBlock = $("<div>").addClass("col-sm-1 time-block");
-    var input = $('<input type="text">').addClass("col-sm-9");
+    var input = $('<input type="text">').addClass("col-sm-10");
     //var checkBtn = $("<button>").addClass("col-sm-1");
     var saveBtn = $("<button>").addClass("col-sm-1 saveBtn");
 
@@ -57,74 +65,55 @@ displayTime.forEach(function(element) {
 
     timeBlock.text(element.text);
     input.attr('id', element.text); 
-    saveBtn.attr('id', element.text);
-    //timeBlock.innerHTML = JSON.stringify(element)
-    //console.log(element.toString())
-    
+    saveBtn.attr('id', element.text + "Btn");
 
     row.append(timeBlock);
     row.append(input);
     //row.append(checkBtn);
     row.append(saveBtn);
-    
-    //let hour = JSON.stringify(element)
-    //$("aside").innerText = hour
-    //console.log(JSON.stringify(element))
 
     $("#container").append(row)
 
 });
 
 //target event
-//$("button").on("click", function() {
-//    var inputText = $("input").text
- //   if (inputText === "") {
- //       alert("error", "Email cannot be blank");
- //   } else {
- //       storeToDo();
-  //  }
-//});
-
-
-
-//displayTime.forEach(function(element) {
-   // $("aside").innerHTML = JSON.stringify(element)
-//}
-
 
 $("button").on("click", function() {
-    $('input[type="text"]').blur(function() {
-        if(!$(this).val()) {
-            alert("empty")
-        } else {
-            alert("not empty")
-            storeToDo();
-        }
-    })
+    
+    if(!$('input[type="text"]').val()) {
+        
+    } else {
+        
+        jQuery();
+    }
 })
 
 
-function storeToDo() {
-        if (typeof (window.localStorage) != "undefined") {
-            //set the value to the text fields
-            $('input[type="text"]').val(function () {
-                return localStorage.getItem(this.id);
-            });
-            $('input[type="text"]').on("change", function () {
-                localStorage.setItem(this.id, $(this).val());
-            });
-        }
-    };
+jQuery(function ($) {
+    if (typeof (window.localStorage) != "undefined") {
+
+        // will get value of specific id from the browser localStorage and set to the input 
+        $("input[type=text]").val(function () {
+            return localStorage.getItem(this.id);
+        });
+
+        // will set values in browser localStorage for further reference
+        $("input[type=text]").on("change", function () {
+            localStorage.setItem(this.id, $(this).val());
+        });
+    }
+});
 
 
+$("#9:00Btn").off().on("click", function() {
+    
+        localStorage.clear();
+    
+    
+});
+
+// get key id and print in input text
+//if key === input id print inner html
 
 //add a check button
 //<i class="fas fa-check"></i>
-
-
-
-//function localStorage() {
- //   localStorage.getItem(input);
-//}
-
-//var saveBtnClickEvent = saveBtn.addEventListener("click");
